@@ -5,6 +5,8 @@
 #include "kbbind.h"
 #include "kbprofile.h"
 #include "macroreader.h"
+#include "macroline.h"
+#include "macrotablemodel.h"
 
 // Key rebinding widget
 
@@ -65,16 +67,14 @@ private slots:
     void on_programKpSIBox_clicked(bool checked);
     void on_programKrSIBox_clicked(bool checked);
     void on_animButton_clicked(bool checked);
-    void on_pteMacroBox_textChanged();
+    //void on_pteMacroBox_textChanged();
     void on_btnStartMacro_clicked();
-    void on_btnStopMacro_clicked();
     void on_btnClearMacro_clicked();
-
-    void on_rb_delay_no_toggled(bool checked);
-
     void on_rb_delay_asTyped_toggled(bool checked);
-
     void on_rb_delay_default_toggled(bool checked);
+    void on_captureTypeBox_currentIndexChanged(int index);
+
+    void on_pushButton_clicked();
 
 private:
     Ui::RebindWidget *ui;
@@ -103,7 +103,17 @@ private:
     QStringList mouseKeys;
     QStringList mouseExtKeys;
     QStringList wheelKeys;
-    MacroReader* macReader;     ///< \brief macReader holds the MacroReader when macro recording starts.
+    MacroReader* macroReader;     ///< \brief macReader holds the MacroReader when macro recording starts.
+    void macroLineRead(QString line, qint64 ustime, bool keydown, bool printable);
+    MacroTableModel macroLines;
+    
+    enum  CAPTURE_TYPE {
+        CAPTURE_CURRENT_DEVICE,
+        CAPTURE_ALL_DAEMON_DEVICES,
+        CAPTURE_ALL_KEYBOARDS,
+    } captureType;
+    void tabChanged(int idx);
+    QString macroLinesToString();
 };
 
 #endif // REBINDWIDGET_H

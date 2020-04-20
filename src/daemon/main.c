@@ -5,6 +5,8 @@
 #include "notify.h"
 #include "request_hid_mac.h"
 #include <ckbnextconfig.h>
+#include <stdlib.h>
+#include <time.h>
 
 // usb.c
 extern _Atomic int reset_stop;
@@ -256,6 +258,7 @@ int main(int argc, char** argv){
     } else
         ckb_warn_nofile("Unable to setup signal handlers\n");
 
+    srand(time(NULL));
 
     // Start the USB system
     int result = usbmain();
