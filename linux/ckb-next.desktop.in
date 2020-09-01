@@ -12,3 +12,5 @@ TryExec=@CMAKE_INSTALL_PREFIX@/bin/ckb-next
 Exec=@CMAKE_INSTALL_PREFIX@/bin/ckb-next
 Icon=ckb-next
 StartupNotify=true
+
+
